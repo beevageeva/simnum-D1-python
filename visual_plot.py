@@ -41,6 +41,8 @@ class VisualPlot:
 		nplots = len(titles)
 		self.z = z
 		fig, ax =  plt.subplots(nplots,1,True)
+		if(nplots == 1):
+			ax = [ax]
 		self.figures = [fig]
 		self.lines = {}
 		self.axes = {}
