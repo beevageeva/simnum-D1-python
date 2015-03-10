@@ -1,3 +1,11 @@
+"""
+	In this module uc ue um are recalculated each step from corresponding fluxes
+	boundary conditions are applied and these depend on the problemType defined in constants
+
+"""
+
+
+
 from constants import gamma
 import numpy as np
 
@@ -13,6 +21,17 @@ lrBoundaryConditions = None
 
 
 def getInitialUcUe(rho, v , p):
+	"""
+		calculates initial uc and ue 
+		Parameters:		
+			rho - density
+			v		- velocity
+			p		- pression
+		returns:
+			a hash with keys "ue" and "uc" and corresponding values of initial uc and ue
+
+		
+	"""
 	uc = np.multiply(rho, v)
 	ue = np.add(np.divide(p,(gamma - 1.0)),0.5 * np.multiply(rho, np.power(v, 2.0)))
 	#print("getInitialUcUe uc:")
@@ -23,18 +42,42 @@ def getInitialUcUe(rho, v , p):
 	return {'uc': uc, 'ue': ue}
 
 def recalculateVelPres(rho, uc, ue):
+	"""
+		recalculates velocity and pression at the end of each iteration
+		Parameters:		
+			rho 
+			uc	
+			ue	
+		returns:
+			a hash with keys "vel" and "pres" and corresponding values of velocity and pressure
+
+		
+	"""
 	v = np.divide(uc, rho)
 	t1 = np.subtract(ue,np.divide(np.power(uc, 2.0), np.multiply(rho, 2.0)))	
 	p = np.multiply((gamma - 1.0), t1)
 	return {'vel': v, 'pres': p}
 
 def recalculateFluxes(rho, uc, ue, v, p):
+	"""
+		recalculate fluxes 
+	"""
 	fm = uc
 	fc = np.divide(np.power(uc, 2.0), rho) + p
 	fe = np.multiply((ue + p), v)
 	return {'fm': fm, 'fc': fc, 'fe': fe}
 
 def getTimestep(v, p, rho):
+	"""
+		calculates the timestep of each iteration
+		Parameters:	
+			v
+			p
+			rho	
+		Returns:
+			the timestep
+		
+	"""	
 	#print("getTimestep pres")
 	#print(" ".join(map(str, p)))
 	#print("getTimestep rho")
@@ -61,6 +104,10 @@ from constants import schemeType, loopType
 if schemeType == "fg":
 	
 	def calcIntermUArray(u, f, dt):
+		"""
+			for fg scheme it calculates the intermediary array u from f
+			here loopType parameter from constants is taken into account
+		"""
 		from common import getDz
 		from constants import nint
 		lambdaParam = dt / getDz()
@@ -83,6 +130,10 @@ if schemeType == "fg":
 
 
 	def calcFinalUArray(u, intermF, dt, skip=0):
+		"""
+			for fg scheme it calculates the final array u from f
+			here loopType parameter from constants is taken into account
+		"""
 		from common import getDz
 		from constants import nint
 		lambdaParam = dt / getDz()
@@ -133,6 +184,15 @@ if schemeType == "fg":
 
 	
 	def recalculateU(rho, uc, ue, fm, fc ,fe, dt):
+		"""
+			for fg scheme it calculates the um(density), ue, um from corresponding fluxes
+			The 3 variables are calculated in the same way(the time differentiation)
+			at each iteration
+			calculating the intermediate array and final array
+			here the boundary conditions are applied
+			and the parameter bcStep from constants is taken into account
+
+		"""
 		global lrBoundaryConditions
 		#print("calcIntermRho ")
 		lrBoundaryConditions = lrBoundaryConditionsPresRho
@@ -155,6 +215,10 @@ if schemeType == "fg":
 elif schemeType == "lf":
 
 	def calcSingleStepU(u,f, dt):
+		"""
+			for lf scheme it calculates the  array  (it is calculated once different to fg scheme)
+			here loopType parameter from constants is taken into account
+		"""
 		from common import getDz
 		from constants import nint
 		lambdaParam = dt / getDz()
@@ -180,6 +244,13 @@ elif schemeType == "lf":
 		return res
 	
 	def recalculateU(rho, uc, ue, fm , fc, fe, dt):
+		"""
+			for lf scheme it calculates the um(density), ue, um from corresponding fluxes
+			The 3 variables are calculated in the same way(the time differentiation)
+			at each iteration
+			here the boundary conditions are applied
+
+		"""
 		global lrBoundaryConditions
 		#print("recalculateRho")
 		lrBoundaryConditions = lrBoundaryConditionsPresRho

@@ -1,0 +1,81 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module sound_wave_packet_params</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>sound_wave_packet_params</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/scratch1/simnum/D1-python/pydoc/sound_wave_packet_params.py">/scratch1/simnum/D1-python/pydoc/sound_wave_packet_params.py</a></font></td></tr></table>
+    <p><tt>The&nbsp;parameters&nbsp;for&nbsp;gaussian&nbsp;sound&nbsp;wave&nbsp;packet<br>
+k0&nbsp;-&nbsp;wavenumber<br>
+zc&nbsp;-&nbsp;center&nbsp;of&nbsp;the&nbsp;gauss&nbsp;function<br>
+W&nbsp;width&nbsp;of&nbsp;the&nbsp;gauss&nbsp;function</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-getSoundWaveFFTAnalytical"><strong>getSoundWaveFFTAnalytical</strong></a>(k0, zc, W)</dt><dd><tt>Parameters<br>
+----------<br>
+k0&nbsp;:&nbsp;int&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wavenumber<br>
+zc&nbsp;:&nbsp;real<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;center&nbsp;of&nbsp;the&nbsp;gauss&nbsp;function&nbsp;&nbsp;&nbsp;&nbsp;<br>
+W&nbsp;:&nbsp;real<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width&nbsp;of&nbsp;the&nbsp;gauss&nbsp;function<br>
+&nbsp;<br>
+returns&nbsp;analytical&nbsp;expression&nbsp;of&nbsp;the&nbsp;sound&nbsp;wave&nbsp;function&nbsp;defined&nbsp;above:&nbsp;[-(z-zc)**2/W**2]&nbsp;*&nbsp;&nbsp;cos(2&nbsp;pi&nbsp;k0&nbsp;(z-z0)/(zf-z0)&nbsp;)<br>
+calculated&nbsp;with&nbsp;mathematica</tt></dd></dl>
+ <dl><dt><a name="-getSoundWaveFunction"><strong>getSoundWaveFunction</strong></a>(k0, zc, W)</dt><dd><tt>returns&nbsp;the&nbsp;resulting&nbsp;wave&nbsp;function&nbsp;obtained&nbsp;by&nbsp;multiplying&nbsp;the&nbsp;gauss&nbsp;function&nbsp;with&nbsp;a&nbsp;cos&nbsp;function:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k0&nbsp;:&nbsp;int&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wavenumber<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zc&nbsp;:&nbsp;real<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;center&nbsp;of&nbsp;the&nbsp;gauss&nbsp;function&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;W&nbsp;:&nbsp;real<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width&nbsp;of&nbsp;the&nbsp;gauss&nbsp;function<br>
+returns&nbsp;f&nbsp;so&nbsp;that:<br>
+f(z)&nbsp;=&nbsp;&nbsp;g(z)&nbsp;/&nbsp;cos(2&nbsp;pi&nbsp;k0&nbsp;(z-z0)/(zf-z0)&nbsp;)<br>
+with&nbsp;g&nbsp;the&nbsp;gauss&nbsp;function&nbsp;defined&nbsp;above</tt></dd></dl>
+ <dl><dt><a name="-getSoundWaveGaussFunction"><strong>getSoundWaveGaussFunction</strong></a>(zc, W)</dt><dd><tt>returns&nbsp;the&nbsp;gauss&nbsp;function&nbsp;(of&nbsp;the&nbsp;envelope)&nbsp;-&nbsp;this&nbsp;is&nbsp;a&nbsp;gaussian&nbsp;wave&nbsp;packet!&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zc&nbsp;:&nbsp;real<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;center&nbsp;of&nbsp;the&nbsp;gauss&nbsp;function&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;W&nbsp;:&nbsp;real<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width&nbsp;of&nbsp;the&nbsp;gauss&nbsp;function<br>
+returns&nbsp;g&nbsp;so&nbsp;that<br>
+g(z)&nbsp;=&nbsp;-(z-zc)**2/W**2</tt></dd></dl>
+ <dl><dt><a name="-sqrt"><strong>sqrt</strong></a>(...)</dt><dd><tt><a href="#-sqrt">sqrt</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;square&nbsp;root&nbsp;of&nbsp;x.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>W</strong> = 0.05<br>
+<strong>inhomogSubtype</strong> = 1<br>
+<strong>k0</strong> = 60.0<br>
+<strong>mediumType</strong> = 'inhomog'<br>
+<strong>pi</strong> = 3.141592653589793<br>
+<strong>z0</strong> = 3.1<br>
+<strong>zc</strong> = 3.9600000000000004<br>
+<strong>zf</strong> = 7.4</td></tr></table>
+</body></html>

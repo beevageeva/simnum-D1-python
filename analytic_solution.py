@@ -31,10 +31,10 @@ elif mediumType == "inhomog":
 	print("creating newZ for analytic sol and  " )
 
 	
-	#method = 1
+	#method = 1  #NEVER USE!
 	method = 2
 	#method = 3
-	#method = 4
+	#method = 4  #NEVER USE!
 
 	useWeave = True
 	#useWeave = False #is weave faster than numpy operations?
@@ -141,10 +141,10 @@ elif mediumType == "inhomog":
 			nans, x= np.isnan(curve), lambda z: z.nonzero()[0]
 			curve[nans]= np.interp(x(nans), x(~nans), curve[~nans])
 
-		print("curve")
+		#print("curve")
 
 		#print(curve)
-		print("MAX CURVE = %e , IND MAX CURVE =%d, min CURVE = %e , ind MIN curve = %d" % (np.max(curve), np.argmax(curve), np.min(curve), np.argmin(curve) ) )
+		#print("MAX CURVE = %e , IND MAX CURVE =%d, min CURVE = %e , ind MIN curve = %d" % (np.max(curve), np.argmax(curve), np.min(curve), np.argmin(curve) ) )
 		
 		
 
@@ -153,13 +153,17 @@ elif mediumType == "inhomog":
 
 	def updateNewZ(modelObj, dt, csNumerical):
 		for index in range(newZ.shape[0]):
-			newZ[index] = modelObj.getNewPoint(newZ[index],dt, False)
+			newZ[index] = modelObj.getNewPoint(newZ[index],dt, csNumerical)
 
 
 
 
 
 def getCurves(z, t):
+	"""
+		calculates values of generic perturbations A * h(z)
+		if there is a superposition pres and rho perturbation will be different from velocity perturbation	
+	"""
 	from soundwave_perturbation_params import perturbationType
 	if perturbationType == "superposition":
 		from soundwave_perturbation_params import  init_functions_generation

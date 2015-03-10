@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+
+"""
+	reflType parameter for boundary conditions
+	It can have values "refl" or "repeat"
+	
+
+"""
+
+
+
 import numpy as np
 from constants import z0, zf
 
@@ -15,6 +26,9 @@ if periodicType == "repeat":
 	lrBoundaryConditionsVel = lrBoundaryConditionsPresRho
 
 	def getPeriodicX(xval, a=z0, b=zf):
+		"""
+			returns x in [z0,zf]  in concordance with boundary conditions applied
+		"""
 		p = float(b - a)
 		k = int((xval-a)/p)
 		res = xval - k * p

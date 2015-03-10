@@ -1,10 +1,23 @@
+"""
+Parameters related to plotting
+
+notifier_type = "visual" it should remain like this as for historical reasons there is a save_to_file module which would save 
+the results to a file the results instead of plotting on the graph
+
+nStepsPlot  - every nStepsPlot iterations the result will be plot
+plot* = True if I want to plot * on the graph 
+markPoints will plot max of pressure 
+
+"""
+
+
 notifierType = "visual"
 nstepsPlot = 10 
 #nstepsPlot = 1
 
 #The following are used for the notifier(taken from notifier_params as they were wavesound specific)
-plotPresCurve = False
-#plotPresCurve = True
+#plotPresCurve = False
+plotPresCurve = True
 #plotRhoCurve = False
 plotRhoCurve = True
 plotVelCurve = False

@@ -23,6 +23,25 @@ def getNotifier(notifierType, z, titles, iniValues):
 class BaseModel:
 	
 	def __init__(self):
+
+		"""
+		constructor for the base model class (all the problems use the same algorithm to calculate the dens, pres and vel variables)
+		Attributes:
+			z the array
+			rho
+			pres
+			vel
+			uc
+			ue
+			fm
+			fc
+			fe
+		(um = rho, there is no separate variable)
+		I need to have getInitialValues defined in derived class 		
+		at the end it calls model additionalInit and notifier(visual_plot) afterInit function
+
+		"""
+
 		from common import getZArray
 		from alg import getInitialUcUe
 		self.z = getZArray()
@@ -67,6 +86,14 @@ class BaseModel:
 
 
 	def mainLoop(self, timeEnd):
+		"""
+			main loop
+			it calls at the end updateValuesModel 
+			and (every nStepsPlot defined in notifier_params.py) it calls model updateValuesNotifier and notifier afterUpdateValues
+			from corresponding model class(inheritance!)
+			in the case of sound_wave this is model_soundwave.py
+			in the case of sound_wave this is model_riemann.py
+		"""
 		from alg import recalculateFluxes, getTimestep, recalculateU, recalculateVelPres,getInitialUcUe
 		time = 0.0
 		nstep = 0

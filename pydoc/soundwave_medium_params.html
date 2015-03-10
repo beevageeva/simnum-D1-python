@@ -1,0 +1,81 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module soundwave_medium_params</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>soundwave_medium_params</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/scratch1/simnum/D1-python/pydoc/soundwave_medium_params.py">/scratch1/simnum/D1-python/pydoc/soundwave_medium_params.py</a></font></td></tr></table>
+    <p><tt>parameters&nbsp;related&nbsp;to&nbsp;medium<br>
+&nbsp;<br>
+Attributes:<br>
+---------------<br>
+p00&nbsp;&nbsp;equilibrium&nbsp;pressure<br>
+v00&nbsp;&nbsp;equilibrium&nbsp;velocity<br>
+mediumType&nbsp;=&nbsp;"homog"&nbsp;|&nbsp;"inhomog"<br>
+&nbsp;<br>
+in&nbsp;the&nbsp;case&nbsp;of&nbsp;homogeneous&nbsp;medium&nbsp;set&nbsp;rho00&nbsp;(equilibrium&nbsp;density)&nbsp;otherwise&nbsp;rho0&nbsp;will&nbsp;be&nbsp;a&nbsp;function&nbsp;depending&nbsp;on&nbsp;z<br>
+defining&nbsp;rho00&nbsp;and&nbsp;rho00&nbsp;it&nbsp;will&nbsp;be&nbsp;a&nbsp;slow&nbsp;varying&nbsp;function&nbsp;from&nbsp;rho00&nbsp;to&nbsp;rho01</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-atan"><strong>atan</strong></a>(...)</dt><dd><tt><a href="#-atan">atan</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;arc&nbsp;tangent&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-atanh"><strong>atanh</strong></a>(...)</dt><dd><tt><a href="#-atanh">atanh</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;hyperbolic&nbsp;arc&nbsp;tangent&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-cos"><strong>cos</strong></a>(...)</dt><dd><tt><a href="#-cos">cos</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cosine&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
+ <dl><dt><a name="-cs00"><strong>cs00</strong></a>(z)</dt><dd><tt>variable&nbsp;sound&nbsp;speed</tt></dd></dl>
+ <dl><dt><strong>csderAnal</strong> <em>lambda</em> z</dt></dl>
+ <dl><dt><a name="-densFunc"><strong>densFunc</strong></a>(z)</dt><dd><tt>eq&nbsp;density&nbsp;function&nbsp;depending&nbsp;on&nbsp;z</tt></dd></dl>
+ <dl><dt><a name="-getDensVarLength"><strong>getDensVarLength</strong></a>(z)</dt><dd><tt>min(|densFunc|&nbsp;/&nbsp;|densFunc'|)</tt></dd></dl>
+ <dl><dt><a name="-getXIntF"><strong>getXIntF</strong></a>(z)</dt></dl>
+ <dl><dt><a name="-log"><strong>log</strong></a>(...)</dt><dd><tt><a href="#-log">log</a>(x[,&nbsp;base])<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;logarithm&nbsp;of&nbsp;x&nbsp;to&nbsp;the&nbsp;given&nbsp;base.<br>
+If&nbsp;the&nbsp;base&nbsp;not&nbsp;specified,&nbsp;returns&nbsp;the&nbsp;natural&nbsp;logarithm&nbsp;(base&nbsp;e)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-sqrt"><strong>sqrt</strong></a>(...)</dt><dd><tt><a href="#-sqrt">sqrt</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;square&nbsp;root&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-sqrtDensInt"><strong>sqrtDensInt</strong></a> = sqrtDensIntNumeric(z)</dt><dd><tt>#calculate&nbsp;numerically!</tt></dd></dl>
+ <dl><dt><strong>sqrtDensIntMathematica</strong> <em>lambda</em> z</dt><dd><tt>#de&nbsp;mathematica<br>
+#but&nbsp;the&nbsp;value&nbsp;evaluated&nbsp;in&nbsp;3.1&nbsp;for&nbsp;example&nbsp;is&nbsp;complex!!!</tt></dd></dl>
+ <dl><dt><a name="-sqrtDensIntNumeric"><strong>sqrtDensIntNumeric</strong></a>(z)</dt><dd><tt>#calculate&nbsp;numerically!</tt></dd></dl>
+ <dl><dt><strong>sqrtDensPowMinusOneDer</strong> <em>lambda</em> z</dt><dd><tt>#desympy</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>gamma</strong> = 1.6666666666666667<br>
+<strong>inhomogSubtype</strong> = 1<br>
+<strong>mediumType</strong> = 'inhomog'<br>
+<strong>p00</strong> = 1.0<br>
+<strong>rho00</strong> = 1.0<br>
+<strong>rho01</strong> = 0.01<br>
+<strong>v00</strong> = 0.0<br>
+<strong>we</strong> = 0.4<br>
+<strong>z0</strong> = 3.1<br>
+<strong>ze</strong> = 3.9600000000000004<br>
+<strong>zf</strong> = 7.4</td></tr></table>
+</body></html>

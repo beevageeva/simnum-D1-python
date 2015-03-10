@@ -1,6 +1,25 @@
+
+"""
+Parameters:
+	gamma = constant (5/3)
+	problemType = "soundwave" | "riemann"
+	[z0, zf] domain
+	nint - number of intervals
+	timeEnd - the default timeEnd if not specified as parameter to main.py
+	schemeType = "lf" | "fg"
+	loopType = "python" | "weave"  (if set to weave the loops are run calling C from python using weave). 
+This is used in alg.py (when calculating time-derivatives) and 
+analytic_solution.py when calculating analytic pressure in inhomogeneous medium
+
+	fcfl - is different for each scheme type
+	In the case of schemeType = "fg" we can define bcStep parameter: "interm" or "final" (the step when to apply the boundary conditions)
+	
+
+"""
+
+
 gamma = 5.0/3
 
-#problemType="soundwave" #problemType may be soundwave or riemann
 problemType = "soundwave"
 #problemType = "riemann"
 if problemType == "soundwave":

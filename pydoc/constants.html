@@ -1,0 +1,42 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module constants</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>constants</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/scratch1/simnum/D1-python/pydoc/constants.py">/scratch1/simnum/D1-python/pydoc/constants.py</a></font></td></tr></table>
+    <p><tt>Parameters:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gamma&nbsp;=&nbsp;constant&nbsp;(5/3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;problemType&nbsp;=&nbsp;"soundwave"&nbsp;|&nbsp;"riemann"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[z0,&nbsp;zf]&nbsp;domain<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nint&nbsp;-&nbsp;number&nbsp;of&nbsp;intervals<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timeEnd&nbsp;-&nbsp;the&nbsp;default&nbsp;timeEnd&nbsp;if&nbsp;not&nbsp;specified&nbsp;as&nbsp;parameter&nbsp;to&nbsp;main.py<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;schemeType&nbsp;=&nbsp;"lf"&nbsp;|&nbsp;"fg"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loopType&nbsp;=&nbsp;"python"&nbsp;|&nbsp;"weave"&nbsp;&nbsp;(if&nbsp;set&nbsp;to&nbsp;weave&nbsp;the&nbsp;loops&nbsp;are&nbsp;run&nbsp;calling&nbsp;C&nbsp;from&nbsp;python&nbsp;using&nbsp;weave).&nbsp;<br>
+This&nbsp;is&nbsp;used&nbsp;in&nbsp;alg.py&nbsp;(when&nbsp;calculating&nbsp;time-derivatives)&nbsp;and&nbsp;<br>
+analytic_solution.py&nbsp;when&nbsp;calculating&nbsp;analytic&nbsp;pressure&nbsp;in&nbsp;inhomogeneous&nbsp;medium<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fcfl&nbsp;-&nbsp;is&nbsp;different&nbsp;for&nbsp;each&nbsp;scheme&nbsp;type<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;the&nbsp;case&nbsp;of&nbsp;schemeType&nbsp;=&nbsp;"fg"&nbsp;we&nbsp;can&nbsp;define&nbsp;bcStep&nbsp;parameter:&nbsp;"interm"&nbsp;or&nbsp;"final"&nbsp;(the&nbsp;step&nbsp;when&nbsp;to&nbsp;apply&nbsp;the&nbsp;boundary&nbsp;conditions)</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>bcStep</strong> = 'interm'<br>
+<strong>fcfl</strong> = 0.97<br>
+<strong>gamma</strong> = 1.6666666666666667<br>
+<strong>loopType</strong> = 'weave'<br>
+<strong>nint</strong> = 2048<br>
+<strong>problemType</strong> = 'soundwave'<br>
+<strong>schemeType</strong> = 'fg'<br>
+<strong>timeEnd</strong> = 1.0<br>
+<strong>z0</strong> = 3.1<br>
+<strong>zf</strong> = 7.4</td></tr></table>
+</body></html>

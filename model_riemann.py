@@ -160,7 +160,6 @@ class Model(BaseModel):
 		#ANALYTICAL DCPoint
 		self.dcPoint = self.getNewDcPoint(dt)
 		#ANALYTICAL RWPoint
-		from common import displacedPoint
 		from riemann_params import  velLeft
 		from initcond_riemann import getCsLeft
 		from riemann_params import timeAfterAnPoints
@@ -190,9 +189,9 @@ class Model(BaseModel):
 
 
 	def updateValuesNotifier(self, dt, time):
-		self.notifier.updateValues("rho", self.rho)
-		self.notifier.updateValues("pres", self.pres)
-		self.notifier.updateValues("vel", self.vel)
+		self.notifier.updateValues("rho", self.rho, time)
+		self.notifier.updateValues("pres", self.pres, time)
+		self.notifier.updateValues("vel", self.vel, time)
 		#zC is also moving
 		self.notifier.markPoint("rho", "zCRho", self.zcPoint)
 		self.notifier.markPoint("pres", "zCPres", self.zcPoint)
@@ -251,13 +250,14 @@ class Model(BaseModel):
 
 	
 	def getNewDcPoint(self, dt):
-		from common import displacedPoint, getZIndex
+		from common import  getZIndex
+		from riemann_boundary_conditions import getPeriodicX
 		from riemann_params import rhoRight, zC
 		#zIndex = getZIndex(self.dcPoint)	
 		#take 2 points right to this one because of the discontinuity
 		#zIndex +=2
 		zIndex = getZIndex(0.5*(zC + self.shPoint))	
-		newz = displacedPoint(self.dcPoint, self.vel[zIndex], dt)
+		newz = getPeriodicX(self.dcPoint + self.vel[zIndex] * dt)
 		return newz
 
 

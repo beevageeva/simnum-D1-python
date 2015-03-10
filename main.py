@@ -1,4 +1,11 @@
-import getopt,sys
+"""
+main python file
+
+      $ python main.py [--timeEnd=NUMBER]
+
+"""
+
+import sys
 from constants import problemType
 if problemType == "soundwave":
 	from model_soundwave import Model
@@ -14,28 +21,31 @@ def usage():
 
 
 
-try:
-        opts, args = getopt.getopt(sys.argv[1:], "", ["help",  "timeEnd="])
-except getopt.GetoptError as err:
-        # print help information and exit:
-        print(str(err)) # will print something like "option -a not recognized"
-        usage()
-        sys.exit(2)
-timeEnd = None
-for o, a in opts:
-	if o in("--timeEnd"):
-		timeEnd = float(a)
-	elif o in ("--help"):
-		usage()
-		sys.exit()
-	else:
-		print("option %s not recognized " % o)
-		usage()
-if timeEnd is None:
-	from constants import timeEnd
-m = Model()
-m.mainLoop(timeEnd)
-import time
-time.sleep(5)
+if __name__ == "__main__":
+	import getopt
+	
+	try:
+	        opts, args = getopt.getopt(sys.argv[1:], "", ["help",  "timeEnd="])
+	except getopt.GetoptError as err:
+	        # print help information and exit:
+	        print(str(err)) # will print something like "option -a not recognized"
+	        usage()
+	        sys.exit(2)
+	timeEnd = None
+	for o, a in opts:
+		if o in("--timeEnd"):
+			timeEnd = float(a)
+		elif o in ("--help"):
+			usage()
+			sys.exit()
+		else:
+			print("option %s not recognized " % o)
+			usage()
+	if timeEnd is None:
+		from constants import timeEnd
+	m = Model()
+	m.mainLoop(timeEnd)
+	import time
+	time.sleep(5)
 
 

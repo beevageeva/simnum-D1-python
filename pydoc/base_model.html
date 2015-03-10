@@ -1,0 +1,82 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module base_model</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>base_model</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/scratch1/simnum/D1-python/pydoc/base_model.py">/scratch1/simnum/D1-python/pydoc/base_model.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="initcond_soundwave.html">initcond_soundwave</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="base_model.html#BaseModel">BaseModel</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BaseModel">class <strong>BaseModel</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="BaseModel-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>constructor&nbsp;for&nbsp;the&nbsp;base&nbsp;model&nbsp;class&nbsp;(all&nbsp;the&nbsp;problems&nbsp;use&nbsp;the&nbsp;same&nbsp;algorithm&nbsp;to&nbsp;calculate&nbsp;the&nbsp;dens,&nbsp;pres&nbsp;and&nbsp;vel&nbsp;variables)<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z&nbsp;the&nbsp;array<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rho<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pres<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vel<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uc<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ue<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fm<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fc<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fe<br>
+(um&nbsp;=&nbsp;rho,&nbsp;there&nbsp;is&nbsp;no&nbsp;separate&nbsp;variable)<br>
+I&nbsp;need&nbsp;to&nbsp;have&nbsp;getInitialValues&nbsp;defined&nbsp;in&nbsp;derived&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+at&nbsp;the&nbsp;end&nbsp;it&nbsp;calls&nbsp;model&nbsp;additionalInit&nbsp;and&nbsp;notifier(visual_plot)&nbsp;afterInit&nbsp;function</tt></dd></dl>
+
+<dl><dt><a name="BaseModel-mainLoop"><strong>mainLoop</strong></a>(self, timeEnd)</dt><dd><tt>main&nbsp;loop<br>
+it&nbsp;calls&nbsp;at&nbsp;the&nbsp;end&nbsp;updateValuesModel&nbsp;<br>
+and&nbsp;(every&nbsp;nStepsPlot&nbsp;defined&nbsp;in&nbsp;notifier_params.py)&nbsp;it&nbsp;calls&nbsp;model&nbsp;updateValuesNotifier&nbsp;and&nbsp;notifier&nbsp;afterUpdateValues<br>
+from&nbsp;corresponding&nbsp;model&nbsp;class(inheritance!)<br>
+in&nbsp;the&nbsp;case&nbsp;of&nbsp;sound_wave&nbsp;this&nbsp;is&nbsp;model_soundwave.py<br>
+in&nbsp;the&nbsp;case&nbsp;of&nbsp;sound_wave&nbsp;this&nbsp;is&nbsp;model_riemann.py</tt></dd></dl>
+
+<dl><dt><a name="BaseModel-printVars"><strong>printVars</strong></a>(self)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-getNotifier"><strong>getNotifier</strong></a>(notifierType, z, titles, iniValues)</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>gamma</strong> = 1.6666666666666667<br>
+<strong>problemType</strong> = 'soundwave'</td></tr></table>
+</body></html>

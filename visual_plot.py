@@ -5,71 +5,26 @@ import numpy as np
 import sys, os
 from scipy.fftpack import fft,fftfreq#forFourierTransform
 
+"""
+Parameters:
+	saveImages = True - it will save images of every plot in the folder outImages_*
+	plotTimeEveryAxis = True - it will put the time on every axis, otherwise only as a title on the main figure
 
+"""
 
-#saveImages = False
-saveImages = True
+saveImages = False
+#saveImages = True
 
-plotTitleEveryAxis = True
+plotTimeEveryAxis = True
 
-def getXLimits(title):
-	if(title == "velFFT" or title == "presFFT"):
-		return {"minX":-80, "maxX":80}
-	from constants import z0, zf
-	return {"minX" : z0, "maxX" : zf}
-
-def getYLimits(title):
-	from soundwave_medium_params import mediumType
-	if mediumType == "homog":
-		medType = "homog"
-	else:	
-		from soundwave_medium_params import inhomogSubtype
-		if inhomogSubtype == 1:
-			medType = "inhomog1"
-		else:
-			medType = "inhomog2"
-	if(title == "pres"):
-		if medType == "homog":
-			return { "maxY": 1.0006, "minY": 0.9994} #homog
-		elif medType == "inhomog1":
-			return { "maxY": 1.0006, "minY": 0.9995} #inhomog1
-		elif medType == "inhomog2":
-			return {  "maxY": 1.002, "minY": 0.998} #inhomog2
-	elif(title == "vel"):
-		if medType == "homog":
-			return	{ "maxY": 0.0004, "minY": -0.00035} 
-		elif medType == "inhomog1":
-			return	{ "maxY": 0.0015, "minY": -0.0015} 
-		elif medType == "inhomog2":
-			return	 { "maxY": 0.0035, "minY": -0.004}
-	elif(title == "rho"):
-		if medType == "homog":
-			return { "maxY": 1.0004, "minY": 0.9996} 
-		elif medType == "inhomog1":
-			return { "maxY": 1.0004, "minY": 0}	 
-		elif medType == "inhomog2":
-			return { "maxY": 1.3, "minY": 0} 	 
-	elif(title == "rhoCurve"):
-		if medType == "homog":
-			return { "maxY": 0.00025, "minY": -0.00025}		
-		elif medType == "inhomog1":
-			return	{ "maxY": 0.00035, "minY": -0.00035}	
-		elif medType == "inhomog2":
-			return	{ "maxY": 0.0020, "minY": -0.0020}
-	#I should always relim y for pres fft beacuse of the central value in k = 0 (= 1 ,=  p00, = mean value of p)
-	#there is no need for vel fft beacuse mean vel = 0
-	elif(title == "presFFT"):
-		if medType == "inhomog1":
-			return	{ "maxY": 0.00015, "minY": 0}
-		if medType == "inhomog2":
-			return	{ "maxY": 0.00015, "minY": 0}
-		elif medType == "homog":
-			return	{ "maxY": 0.000025, "minY": 0}
-
-	return None
 
 
 def relimAxis(ax, title, setLimits = False):
+
+	"""
+		it will relimit the specified axis by title in concordance with getXLimits and getYLimits functions from domain_plot_limits.py
+	"""
+	from domain_plot_limits import  getYLimits ,getXLimits
 	ylim = getYLimits(title)
 	xlim = getXLimits(title)
 	if(xlim or ylim):
@@ -115,6 +70,11 @@ def getColorFromArray(array):
 
 class VisualPlot:
 
+	"""
+	class responsible with ploting
+	"""
+
+
 	def __init__(self, z, titles, iniValues):
 		if saveImages:
 			from common import createFolder	
@@ -133,7 +93,7 @@ class VisualPlot:
 			title = titles[i]
 			self.addAxis(z, ax[i], title, iniValues[i])
 		#now I piut time in every figure
-		if not plotTitleEveryAxis:
+		if not plotTimeEveryAxis:
 			self.plotTitle = ax[0].set_title("Time 0")
 		wm = plt.get_current_fig_manager()
 		wm.window.wm_geometry("1000x900+50+50")
@@ -298,13 +258,13 @@ class VisualPlot:
 					else:
 						newValuesP = newValues[i]
 					self.lines[title][i].set_ydata(newValuesP)
-		if plotTitleEveryAxis:	
+		if plotTimeEveryAxis:	
 			self.axes[title].set_title("Time %4.4f" % newTime)
 		relimAxis(self.axes[title], title)	
 		
 		
 	def afterUpdateValues(self, newTime):
-		if not plotTitleEveryAxis:
+		if not plotTimeEveryAxis:
 			self.plotTitle.set_text("Time %4.4f" % newTime)
 		numFig = 0
 		for fig in self.figures:

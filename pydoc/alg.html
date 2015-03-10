@@ -1,0 +1,77 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module alg</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>alg</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/scratch1/simnum/D1-python/pydoc/alg.py">/scratch1/simnum/D1-python/pydoc/alg.py</a></font></td></tr></table>
+    <p><tt>In&nbsp;this&nbsp;module&nbsp;uc&nbsp;ue&nbsp;um&nbsp;are&nbsp;recalculated&nbsp;each&nbsp;step&nbsp;from&nbsp;corresponding&nbsp;fluxes<br>
+boundary&nbsp;conditions&nbsp;are&nbsp;applied&nbsp;and&nbsp;these&nbsp;depend&nbsp;on&nbsp;the&nbsp;problemType&nbsp;defined&nbsp;in&nbsp;constants</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-calcFinalU"><strong>calcFinalU</strong></a> = calcFinalUArray(u, intermF, dt, skip<font color="#909090">=0</font>)</dt><dd><tt>for&nbsp;fg&nbsp;scheme&nbsp;it&nbsp;calculates&nbsp;the&nbsp;final&nbsp;array&nbsp;u&nbsp;from&nbsp;f<br>
+here&nbsp;loopType&nbsp;parameter&nbsp;from&nbsp;constants&nbsp;is&nbsp;taken&nbsp;into&nbsp;account</tt></dd></dl>
+ <dl><dt><a name="-calcFinalUArray"><strong>calcFinalUArray</strong></a>(u, intermF, dt, skip<font color="#909090">=0</font>)</dt><dd><tt>for&nbsp;fg&nbsp;scheme&nbsp;it&nbsp;calculates&nbsp;the&nbsp;final&nbsp;array&nbsp;u&nbsp;from&nbsp;f<br>
+here&nbsp;loopType&nbsp;parameter&nbsp;from&nbsp;constants&nbsp;is&nbsp;taken&nbsp;into&nbsp;account</tt></dd></dl>
+ <dl><dt><a name="-calcIntermU"><strong>calcIntermU</strong></a>(u, f, dt)</dt></dl>
+ <dl><dt><a name="-calcIntermUArray"><strong>calcIntermUArray</strong></a>(u, f, dt)</dt><dd><tt>for&nbsp;fg&nbsp;scheme&nbsp;it&nbsp;calculates&nbsp;the&nbsp;intermediary&nbsp;array&nbsp;u&nbsp;from&nbsp;f<br>
+here&nbsp;loopType&nbsp;parameter&nbsp;from&nbsp;constants&nbsp;is&nbsp;taken&nbsp;into&nbsp;account</tt></dd></dl>
+ <dl><dt><a name="-getInitialUcUe"><strong>getInitialUcUe</strong></a>(rho, v, p)</dt><dd><tt>calculates&nbsp;initial&nbsp;uc&nbsp;and&nbsp;ue&nbsp;<br>
+Parameters:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rho&nbsp;-&nbsp;density<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;velocity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;pression<br>
+returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;hash&nbsp;with&nbsp;keys&nbsp;"ue"&nbsp;and&nbsp;"uc"&nbsp;and&nbsp;corresponding&nbsp;values&nbsp;of&nbsp;initial&nbsp;uc&nbsp;and&nbsp;ue</tt></dd></dl>
+ <dl><dt><a name="-getTimestep"><strong>getTimestep</strong></a>(v, p, rho)</dt><dd><tt>calculates&nbsp;the&nbsp;timestep&nbsp;of&nbsp;each&nbsp;iteration<br>
+Parameters:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rho&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;timestep</tt></dd></dl>
+ <dl><dt><a name="-recalculateFluxes"><strong>recalculateFluxes</strong></a>(rho, uc, ue, v, p)</dt><dd><tt>recalculate&nbsp;fluxes</tt></dd></dl>
+ <dl><dt><a name="-recalculateU"><strong>recalculateU</strong></a>(rho, uc, ue, fm, fc, fe, dt)</dt><dd><tt>for&nbsp;fg&nbsp;scheme&nbsp;it&nbsp;calculates&nbsp;the&nbsp;um(density),&nbsp;ue,&nbsp;um&nbsp;from&nbsp;corresponding&nbsp;fluxes<br>
+The&nbsp;3&nbsp;variables&nbsp;are&nbsp;calculated&nbsp;in&nbsp;the&nbsp;same&nbsp;way(the&nbsp;time&nbsp;differentiation)<br>
+at&nbsp;each&nbsp;iteration<br>
+calculating&nbsp;the&nbsp;intermediate&nbsp;array&nbsp;and&nbsp;final&nbsp;array<br>
+here&nbsp;the&nbsp;boundary&nbsp;conditions&nbsp;are&nbsp;applied<br>
+and&nbsp;the&nbsp;parameter&nbsp;bcStep&nbsp;from&nbsp;constants&nbsp;is&nbsp;taken&nbsp;into&nbsp;account</tt></dd></dl>
+ <dl><dt><a name="-recalculateVelPres"><strong>recalculateVelPres</strong></a>(rho, uc, ue)</dt><dd><tt>recalculates&nbsp;velocity&nbsp;and&nbsp;pression&nbsp;at&nbsp;the&nbsp;end&nbsp;of&nbsp;each&nbsp;iteration<br>
+Parameters:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rho&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;hash&nbsp;with&nbsp;keys&nbsp;"vel"&nbsp;and&nbsp;"pres"&nbsp;and&nbsp;corresponding&nbsp;values&nbsp;of&nbsp;velocity&nbsp;and&nbsp;pressure</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>bcStep</strong> = 'interm'<br>
+<strong>gamma</strong> = 1.6666666666666667<br>
+<strong>loopType</strong> = 'weave'<br>
+<strong>lrBoundaryConditions</strong> = None<br>
+<strong>problemType</strong> = 'soundwave'<br>
+<strong>schemeType</strong> = 'fg'</td></tr></table>
+</body></html>

@@ -24,6 +24,9 @@ def getWFunction(functiontype):
 		sys.exit(0)
 
 def fromCurvesToVals(pEq, rhoEq, vEq, presPert, rhoPert, velPert):
+	"""
+		calculates the values form generic perturbations multiplying with corresp coef (from amplitude relationship between variables)
+	"""
 	csEq = np.sqrt(gamma * pEq / rhoEq)
 	return {'pres': pEq + gamma * pEq * presPert  , 'rho': rhoEq + rhoEq * rhoPert , 'vel': vEq + csEq * velPert }
 

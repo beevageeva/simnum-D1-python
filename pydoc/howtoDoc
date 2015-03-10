@@ -1,0 +1,16 @@
+pydoc -w dummy_doc
+pydoc -w base_model
+pydoc -w model_soundwave
+pydoc -w notifier_params
+pydoc -w alg
+pydoc -w analytic_solution
+pydoc -w constants
+pydoc -w initcond_soundwave
+pydoc -w main
+pydoc -w soundwave_boundary_conditions
+pydoc -w soundwave_medium_params
+pydoc -w sound_wave_packet_params
+pydoc -w soundwave_perturbation_params
+pydoc -w common
+pydoc -w visual_plot
+pydoc -w domain_plot_limits

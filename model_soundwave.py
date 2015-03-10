@@ -6,14 +6,35 @@ from base_model import BaseModel
 from notifier_params import plotPresCurve, plotVelCurve, plotRhoCurve, markPoints, plotPresAn, plotRhoAn, plotVelAn, plotVelFFT, plotVelFFTAnal,  plotPresFFT
 from soundwave_medium_params import mediumType, cs00
 
+"""
+Parameters:
+	addMarkPoints a hash with the points I want to follow: at each iteration I call getNewPoint to get their new value
 
+	calcWidth if True it calculates the width of the packet as it is evolving : it calculates it by difference of
+		self.addMarkPoint["right"] - self.addMarkPoint["left"] so I have to have points labelled with "left" 
+		and "right" in addMarkPoints
+		tries to get a relationship between fourier width and packet width (it will append  time maxAmp/widthPacket to ww.txt)
+		it also appends time widthPachet/variation length of density to 	wdcl.txt
+		
 
+	calcKc calculates kc and appends time kc * cs(self.addMarkPoints[0]) to kc.txt
+	(I refer here to self.addMarkPoints[0] as the point which is first in the hash - and calculated in each step as it is displaced with cs: 
+	I put zc)
+	plotWidthOnGraph plots the self.addMarkPoint["left"] and self.addMarkPoint["right"] on the graph
+
+	showErr = True it will append at each iteration time error to preserr.txt, rhoerr.txt or velerr.txt
+
+	all the files *.txt generated here can be plot with 
+		python plotValuesFromText.py file.txt 
+ 	
+
+"""
+
+showErr = False
 #calcWidth = True
 calcWidth = True
 #plotWidthOnGraph = False
 plotWidthOnGraph = True
-#showErr = True
-showErr = False
 calcKc = True
 #calcKc = False
 from soundwave_perturbation_params import perturbationType
@@ -47,8 +68,16 @@ class Model(BaseModel):
 			self.addMarkPoints = addMarkPoints
 
 
-	#csNumerical = False won't work with superposition same point and time (wave packet is not in this case)
 	def getNewPoint(self, zval, dt, csNumerical = True):
+		"""
+			calculates the new z point 
+			Parameters:
+				zval - the  value to calculate
+				dt 
+				csNumerical if True it will calculate cs from current values of p, rho and v, otherwise it will take cs from soundwave_medium_params
+				if the perturbation is a superposition csNumerical=False won't work, but otherwise 
+				taking it from soundwave_medium_params may be faster
+		"""
 		from common import getZIndex
 		from math import sqrt
 		from soundwave_medium_params import v00, p00
@@ -76,10 +105,12 @@ class Model(BaseModel):
 
 
 	def updateValuesModel(self, dt, time):
+		"""
+			called in each iteration of mainLoop methos of parent class base_model.py
+		"""
 		#markPoints used to plot maximum and minumum for rho, pres and vel , in hom medium they travel at cs speed (phase vel), but in inhom at group speed
 		if(markPoints):
 			self.maxPresZ = self.getNewPoint(self.maxPresZ,dt)
-			graphPresMaxZ = self.z[np.argmax(self.pres)]
 		if(calcKc):
 			self.presFFT = self.getPresFFTVals(False)
 			F = self.presFFT[1]
@@ -126,13 +157,14 @@ class Model(BaseModel):
 					from constants import z0, zf
 					from initcond_soundwave import fromValsToCurvePres
 					from soundwave_perturbation_params import A	
-					from soundwave_medium_params import cs00, csderAnal
+					from soundwave_medium_params import cs00
 					#print("dz: %e, dt*minCs=%e" % (getDz(), dt * np.min(cs00(self.z))))
 					cszp0 = cs00(localMarkPoint)
 					cszp = 	cs00(localMarkPoint)
-					kt = k0 *  cszp0/cszp
-					ktnew =  k0 * np.exp(-csderAnal(localMarkPoint) * time)
-					print("kc=%e,kt=%e,ktnew=%e,kc/kt = %e, kc*cs(zp(t))=%e,ktnew*cszp=%e,k0*csz0=%e" % (kc, kt,ktnew,kc / kt, kc * cszp, ktnew*cszp, k0*cszp0))
+					#kt = k0 *  cszp0/cszp
+					#from soundwave_medium_params import csderAnal
+					#ktnew =  k0 * np.exp(-csderAnal(localMarkPoint) * time)
+					#print("kc=%e,kt=%e,ktnew=%e,kc/kt = %e, kc*cs(zp(t))=%e,ktnew*cszp=%e,k0*csz0=%e" % (kc, kt,ktnew,kc / kt, kc * cszp, ktnew*cszp, k0*cszp0))
 					import os
 					os.system("echo %e %e >> %s" % (time, kc * cszp, "kc.txt"))				
 
@@ -154,6 +186,9 @@ class Model(BaseModel):
 
 
 	def updateValuesNotifier(self, dt, time):
+		"""
+			called in every nStepsPlot(defined in notifier_params.py) iterations of mainLoop methos of parent class base_model.py
+		"""
 		#TODO simpl
 		if(plotPresCurve):
 			from initcond_soundwave import fromValsToCurvePres
@@ -180,11 +215,12 @@ class Model(BaseModel):
 		if(plotPresAn):
 			presc = curves['pres']
 			anPres =  anVals['pres']
-			print("in update vgals notif max pres an ind = %d  max = %e" % (np.argmax(anPres),np.max(anPres) ))
+			#print("in update vgals notif max pres an ind = %d  max = %e" % (np.argmax(anPres),np.max(anPres) ))
 			presNewVals = [self.pres, anPres]
 			if(showErr):
 				err = np.max(np.absolute(np.subtract(self.pres, anPres)))
-				print("time=%E,max abs (self.pres - anPres) = %E" % (time,err))
+				#print("time=%E,max abs (self.pres - anPres) = %E" % (time,err))
+				os.system("echo %e %e >> %s" % (time, err , "preserr.txt"))				
 			if(plotPresCurve):
 				presCurveNewVals = [fromValsToCurvePres(self.pres), presc]
 		else:
@@ -197,7 +233,8 @@ class Model(BaseModel):
 			rhoNewVals = [self.rho, anRho]
 			if(showErr):
 				err = np.max(np.absolute(np.subtract(self.rho, anRho)))
-				print("max abs (self.rho - rhoAn) = %E" % err)
+				os.system("echo %e %e >> %s" % (time, err , "rhoerr.txt"))				
+				#print("max abs (self.rho - rhoAn) = %E" % err)
 			if(plotRhoCurve):
 				rhoCurveNewVals = [fromValsToCurveRho(self.rho, self.z), rhoc]
 		else:
@@ -210,7 +247,8 @@ class Model(BaseModel):
 			velNewVals = [self.vel, anVel]
 			if(showErr):
 				err = np.max(np.absolute(np.subtract(self.vel, anVel)))
-				print("max abs (self.vel - velAn) = %E" % err)
+				#print("max abs (self.vel - velAn) = %E" % err)
+				os.system("echo %e %e >> %s" % (time, err , "velerr.txt"))				
 			if(plotVelCurve):
 				velCurveNewVals = [fromValsToCurveVel(self.vel), velc]
 		else:
@@ -266,6 +304,9 @@ class Model(BaseModel):
 #			#print("LZ = %e , RZ = %e" % (self.z[getFirstIndexDifferentLeft(self.pres, delta)], self.z[getFirstIndexDifferentRight(self.pres, delta)]))		
 
 	def getInitialValues(self):
+		"""
+			the initial values of pres, rho and vel as an array (used in order to plot)
+		"""	
 		if plotPresAn:
 			presIniVal = [self.pres, self.pres]
 		else:
@@ -285,6 +326,11 @@ class Model(BaseModel):
 
 		
 	def getVelFFTVals(self, middlePoints):
+		"""
+			calculates f1(k) as defined in pdf of velocity
+			Parameters:
+				middlePoints = True it will use values (v(i) + v(i+1))/2 instead of original values
+		"""	
 		if(middlePoints):
 			vals = (self.vel[1:] + self.vel[:-1]) / 2
 		else:
@@ -305,6 +351,11 @@ class Model(BaseModel):
 		return vals
 
 	def getPresFFTVals(self, middlePoints):
+		"""
+			calculates f1(k) as defined in pdf of pres
+			Parameters:
+				middlePoints = True it will use values (p(i) + p(i+1))/2 instead of original values
+		"""	
 		if(middlePoints):
 			vals = (self.pres[1:] + self.pres[:-1]) / 2
 		else:
@@ -323,6 +374,9 @@ class Model(BaseModel):
 	
 
 	def additionalInit(self):
+		"""
+			called in constructor of parent class base_model.py
+		"""
 		#TODO all initial values of curves are calcutaed 2 times: 2 function calls for each
 		#plot Curves of pression , vel, density
 		if(plotPresCurve):

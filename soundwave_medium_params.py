@@ -1,3 +1,20 @@
+"""
+
+parameters related to medium
+
+Attributes:
+---------------
+p00  equilibrium pressure
+v00  equilibrium velocity
+mediumType = "homog" | "inhomog"
+
+in the case of homogeneous medium set rho00 (equilibrium density) otherwise rho0 will be a function depending on z
+defining rho00 and rho00 it will be a slow varying function from rho00 to rho01
+
+
+
+"""
+
 
 import numpy as np
 from constants import gamma
@@ -45,6 +62,9 @@ elif(mediumType=="inhomog"):
 	#we = 0.4
 	#we = 0.2
 	def densFunc(z):
+		"""
+		eq density function depending on z
+		"""	
 		return rho00 + 0.5 * (rho01-rho00) * (1 + np.tanh((z-ze)/we))
 	#desympy
 	sqrtDensPowMinusOneDer = lambda z:(-(-0.5*rho00 + 0.5*rho01)*(-np.tanh((z - ze)/we)**2 + 1)/(2*we*(rho00 + (-0.5*rho00 + 0.5*rho01)*(np.tanh((z - ze)/we) + 1))**(3/2)))
@@ -79,6 +99,9 @@ elif(mediumType=="inhomog"):
 	
 
 	def getDensVarLength(z):
+		"""
+		min(|densFunc| / |densFunc'|)
+		"""	
 		d = densFunc(z)
 		absGrad = abs(np.gradient(d, z[1]-z[0]))
 		indNotZero = (absGrad!=0)
@@ -86,6 +109,9 @@ elif(mediumType=="inhomog"):
 
 
 	def cs00(z):
+		"""
+			variable sound speed
+		"""
 		return np.sqrt(gamma * p00 / densFunc(z))
 
 

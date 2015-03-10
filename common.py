@@ -18,8 +18,11 @@ def getZIndex(z):
 	#return int((z - z0 + 0.5*dz)/dz )
 
 
-#creates an output directory called out_0, out_1, ... the first that does not exists
 def createFolder(dirname_base="out"):
+	"""
+	creates an output directory called out_0, out_1, ... the first that does not exists
+	where out is dirname_base parameter
+	"""
 	import os
 	dirExists = True
 	i = 0
@@ -32,8 +35,10 @@ def createFolder(dirname_base="out"):
 
 
 
-#because methods are different in python3 and python2
 def testKeyInDict(key, dictionary):
+	"""
+	because methods are different in python3 and python2
+	"""
 	import sys	
 	if (sys.version_info[0]==2):
 		return dictionary.has_key(key)
