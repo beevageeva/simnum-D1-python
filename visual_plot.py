@@ -27,11 +27,12 @@ def relimAxis(ax, title, setLimits = False):
 	from domain_plot_limits import  getYLimits ,getXLimits
 	ylim = getYLimits(title)
 	xlim = getXLimits(title)
-	if(xlim or ylim):
+	if(xlim is None or ylim is None):
 		ax.relim()
-	if not xlim and not ylim:
+	if xlim is None and ylim is None:
 		ax.autoscale_view(True,True,True)
 	else:
+		#I only have to set this limits once at the beginning
 		if setLimits:	
 			if ylim:
 				from matplotlib.ticker import FormatStrFormatter
@@ -39,6 +40,7 @@ def relimAxis(ax, title, setLimits = False):
 				ax.yaxis.set_major_formatter(FormatStrFormatter('%f'))
 			if xlim:
 				ax.set_xlim(xlim["minX"],xlim["maxX"])
+		#afterwards the limits are already set and I only have to autoscale 
 		if not xlim:
 			ax.autoscale_view(True,True,False)
 		else:
