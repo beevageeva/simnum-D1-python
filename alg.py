@@ -102,7 +102,7 @@ def getTimestep(v, p, rho):
 from constants import schemeType, loopType
 if loopType == "cython":
 	import pyximport
-	pyximport.install()
+	pyximport.install(setup_args={'include_dirs':[np.get_include()]})
 
 
 if schemeType == "fg":

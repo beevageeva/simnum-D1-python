@@ -36,13 +36,13 @@ elif mediumType == "inhomog":
 	method = 3
 	#method = 4  #NEVER USE!
 
-	useC = True
-	#useC = False #is weave faster than numpy operations?
+	#useC = True
+	useC = False #is weave faster than numpy operations?
 
 	from constants import loopType
 	if useC and loopType == "cython":
 		import pyximport
-		pyximport.install()
+		pyximport.install(setup_args={'include_dirs':[np.get_include()]})
 
 	def getWFunctionVals(functiontype, csSign, z, time):
 		if(functiontype != "wavepacket"):
