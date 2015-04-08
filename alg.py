@@ -130,7 +130,7 @@ if schemeType == "fg":
 			"""
 			inline(code, ['u', 'lambdaParam', 'res', 'f', 'nint'],type_converters=converters.blitz)
 		elif loopType == "cython":
-			from cython_alg import calc_interm_u_array
+			from cython_alg1 import calc_interm_u_array
 			calc_interm_u_array(res, u,f,nint, lambdaParam) 
 		return res
 
@@ -159,7 +159,7 @@ if schemeType == "fg":
 			"""
 			inline(code, ['u', 'lambdaParam', 'res', 'intermF', 'n', 'skip'],type_converters=converters.blitz)
 		elif loopType == "cython":
-			from cython_alg import calc_final_u_array
+			from cython_alg1 import calc_final_u_array
 			calc_final_u_array(res, u, intermF, n, lambdaParam, skip) 
 		return res
 
@@ -246,7 +246,7 @@ elif schemeType == "lf":
 			"""
 			inline(code, ['u', 'lambdaParam', 'res', 'f', 'nint'],type_converters=converters.blitz)
 		elif loopType == "cython":
-			from cython_alg import calc_singlestep_u_array
+			from cython_alg1 import calc_singlestep_u_array
 			calc_singlestep_u_array(res, u,f,nint, lambdaParam) 
 		
 		#print("calcSingleStep before bc")
