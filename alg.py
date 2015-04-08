@@ -100,6 +100,10 @@ def getTimestep(v, p, rho):
 
 
 from constants import schemeType, loopType
+if loopType == "cython":
+	import pyximport
+	pyximport.install()
+
 
 if schemeType == "fg":
 	
@@ -125,7 +129,9 @@ if schemeType == "fg":
 			}
 			"""
 			inline(code, ['u', 'lambdaParam', 'res', 'f', 'nint'],type_converters=converters.blitz)
-
+		elif loopType == "cython":
+			from cython_alg import calc_interm_u_array
+			calc_interm_u_array(res, u,f,nint, lambdaParam) 
 		return res
 
 
@@ -152,6 +158,9 @@ if schemeType == "fg":
 			}
 			"""
 			inline(code, ['u', 'lambdaParam', 'res', 'intermF', 'n', 'skip'],type_converters=converters.blitz)
+		elif loopType == "cython":
+			from cython_alg import calc_final_u_array
+			calc_final_u_array(res, u, intermF, n, lambdaParam, skip) 
 		return res
 
 	from constants import bcStep
@@ -227,6 +236,7 @@ elif schemeType == "lf":
 			for i in range(1, nint+1):
 				res[i-1] =  0.5 * (u[i-1] + u[i+1]) - 0.5 * lambdaParam  * (f[i+1] - f[i-1]) 
 		elif loopType == "weave":
+			from scipy.weave import inline, converters
 			lambdaParam = float(lambdaParam)
 			code = """
 			for(int i = 1;i<nint+1; i++) {
@@ -235,6 +245,9 @@ elif schemeType == "lf":
 
 			"""
 			inline(code, ['u', 'lambdaParam', 'res', 'f', 'nint'],type_converters=converters.blitz)
+		elif loopType == "cython":
+			from cython_alg import calc_singlestep_u_array
+			calc_singlestep_u_array(res, u,f,nint, lambdaParam) 
 		
 		#print("calcSingleStep before bc")
 		#print(res)	

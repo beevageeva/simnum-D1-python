@@ -46,12 +46,13 @@ timeEnd = 1.0 #if not set as program argument it's taken from here
 #schemeType = "lf"  # scheme type may be lf(Lax - Fr) or fg (first generation)
 schemeType = "fg" 
 #loopType = "python" 
-loopType = "weave" 
+#loopType = "weave" 
+loopType = "cython" 
 if schemeType == "lf":
 	fcfl = 0.99 #use this for lax - fr scheme type
 elif schemeType == "fg":
 	fcfl = 0.97#use this for first generation scheme
-	bcStep = "interm" 
-	#bcStep = "final" 
+	#bcStep = "interm" 
+	bcStep = "final" 
 
 
