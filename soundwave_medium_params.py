@@ -30,8 +30,8 @@ v00 = 0.0
 #v00 = - cs00
 #v00 =  cs00
 
-#mediumType = "homog"  
-mediumType = "inhomog"  #variable density rho00 to test with wave packet
+mediumType = "homog"  
+#mediumType = "inhomog"  #variable density rho00 to test with wave packet
 
 if mediumType == "homog":
 	rho00 = 1.0

@@ -124,6 +124,8 @@ class VisualPlot:
 		plotLegend = False
 		#we can plot multiple graphs on the same axis : example numerical and analytical
 		if(len(shape)==1):
+			ax.hlines(np.min(vals), z[0], z[len(z)-1])
+			ax.hlines(np.max(vals), z[0], z[len(z)-1])
 			if(linestyle == '-'):
 				l, = ax.plot(z, vals, lw=2, color='b')
 			else:
@@ -132,6 +134,8 @@ class VisualPlot:
 			self.lines[title] = l
 		elif(len(shape)==2):
 			self.lines[title] = []
+			ax.hlines(np.min(vals[0]), z[0], z[len(z)-1])
+			ax.hlines(np.max(vals[0]), z[0], z[len(z)-1])
 			for i in range(0, shape[0]):
 				if(linestyle == '-'):
 					if(len(z.shape) == 2):

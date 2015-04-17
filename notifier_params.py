@@ -21,20 +21,20 @@ plotPresCurve = True
 #plotRhoCurve = False
 plotRhoCurve = True
 plotVelCurve = False
-#plotPresAn = False
-#plotRhoAn = False
-#plotVelAn = False
-plotPresAn = True
-plotRhoAn = True
-plotVelAn = True
+plotPresAn = False
+plotRhoAn = False
+plotVelAn = False
+#plotPresAn = True
+#plotRhoAn = True
+#plotVelAn = True
 markPoints = False
 #markPoints = True
 plotVelFFT = True
 #plotVelFFT = False
 #plotVelFFTAnal=False
 plotVelFFTAnal=True
-plotPresFFT = True
-#plotPresFFT = False
+#plotPresFFT = True
+plotPresFFT = False
 
 from soundwave_boundary_conditions import periodicType 
 if periodicType == "refl": 
