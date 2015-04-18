@@ -11,8 +11,10 @@ from constants import z0, zf
 from math import pi,sqrt
 
 k0 = 60.0
+#k0 = 10.0
 zc = z0 + 0.2 * (zf - z0)
 W = 0.05
+#W = 0.5
 
 from soundwave_medium_params import mediumType
 if mediumType == "inhomog":
@@ -85,6 +87,13 @@ def getSoundWaveFFTAnalytical(k0, zc, W):
 	
 	"""
 	from constants import z0, zf
+	k0 = 2 * pi * k0 / (zf - z0)
 	def analyticFFT(k):
-		return ((np.exp(-((pi*(k0**2*pi*W**2 - 2*k0*(k*pi*W**2 - 1j*z0 + 1j*zc)*(z0 - zf) + k*(k*pi*W**2 + (2*1j)*zc)*(z0 - zf)**2))/(z0 - zf)**2)) +  np.exp(-((pi*(k0**2*pi*W**2 + 2*k0*(k*pi*W**2 - 1j*z0 + 1j*zc)*(z0 - zf) + k*(k*pi*W**2 + (2*1j)*zc)*(z0 - zf)**2))/(z0 - zf)**2)))*sqrt(pi)*W)/2
+		#the first is the definition 1 see pdf
+		#the last 2 are equivalent def 2 see pdf
+		#return ((np.exp(-((pi*(k0**2*pi*W**2 - 2*k0*(k*pi*W**2 - 1j*z0 + 1j*zc)*(z0 - zf) + k*(k*pi*W**2 + (2*1j)*zc)*(z0 - zf)**2))/(z0 - zf)**2)) +  np.exp(-((pi*(k0**2*pi*W**2 + 2*k0*(k*pi*W**2 - 1j*z0 + 1j*zc)*(z0 - zf) + k*(k*pi*W**2 + (2*1j)*zc)*(z0 - zf)**2))/(z0 - zf)**2)))*sqrt(pi)*W)/2
+		#return (np.exp(-((k**2 + k0**2)*W**2)/4 + 1j*k*zc)*W*np.cosh((k0*(k*W**2 + (2*1j)*(z0 - zc)))/2))/np.sqrt(2)
+		#print("k0 = %2.2f" % k0)
+		return W/(2*np.sqrt(2)) * np.exp(-1j * k * zc) * (np.exp(-W**2/4.0 * (k+k0)**2) * np.exp(-1j * k0* (z0-zc)) + np.exp(-W**2/4.0 * (k-k0)**2) * np.exp(1j * k0* (z0-zc)))
+		 
 	return analyticFFT

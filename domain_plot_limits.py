@@ -20,7 +20,8 @@ else:
 			if returns None by default the autoscale is done 
 		"""
 		if(title == "velFFT" or title == "presFFT"):
-			return {"minX":-80, "maxX":80}
+			#return {"minX":-80, "maxX":80}
+			return {"minX":-130, "maxX":130}
 		from constants import z0, zf
 		return {"minX" : z0, "maxX" : zf}
 	

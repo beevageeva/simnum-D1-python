@@ -3,6 +3,7 @@
 \documentclass{article}
 \usepackage{amsmath, amssymb, graphics, setspace}
 \usepackage{graphicx}
+\usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{spverbatim}
@@ -354,18 +355,20 @@ $F_h(k) = \int_{- \infty}^{\infty}{h(x) e^{-i k x} dx } $
 $f_1(k)=F_h(\frac{2\pi k}{x_f - x_0} ) = \int_{- \infty}^{\infty}{h(x) e^{-\frac{2 \pi i k x }{x_f - x_0}} dx } $
 
 \item calculo con mathematica (de forma analítica) la transformada fourier de h con FourierTransform usando FourierParameters $0, -2\pi$  y obtengo $f_2(k)$
-
 \item Compruebo de forma numerica y analítica que
 $f_1(k) = f_2(\frac{k}{x_f - x_0})$
 
+\item \color{red}calculo con mathematica (de forma analítica) la transformada fourier de h con FourierTransform sin especificar FourierParameters que por defecto son  $0, 1$  y obtengo $f_3(k)$. De la documentación de mathematica y también se puede comprobar de forma analítica y numérica $f_3(k) = \sqrt{\frac{1}{2 \pi}} \int_{- \infty}^{\infty}{h(x) e^{i k x}}\frac{1}{\sqrt{2 \pi}} f_1(\frac{(x_f - x_0)k}{-2 \pi})$ 
+\color{black}
+
 \item De la teoria sé que si defino los coeficientes: $c(k) = \frac{1}{x_f - x_0} f_1(k) $
 \item  puedo escribir $f(x) = \sum_{k=-\infty}^{\infty} c_k e^{2 \pi i k \frac{x-x_0}{x_f - x_0}}$
+\item observo que en python los coeficientes calculados (de forma numérica) con scipy.fft son $cp(k) = \color{red}\frac{1}{x_f - x_0}  f_1(k)$ \color{black} asi que 
 
 \item \textbf{quiero representar de forma analítica y numeríca} $c(k) * (x_f-x_0)$
 \item \textbf{de forma analítica}: calculo en mathematica $f_1(k)$ o obtengo $f2(k)$ y represento  $f_2(\frac{k}{x_f - x_0})$
-
-\item observo que en python los coeficientes calculados (de forma numérica) con scipy.fft son $cp(k) = f_1(\frac{k}{x_f-x_0})$ asi que 
 \item \textbf{de forma numérica}: calculo en python con scipy.fft cp(k) y  represento $cp(k* (x_f - x_0))* (x_f - x_0)$  
+
 \end{description}
 
 \textbf{Resultado}:
@@ -374,6 +377,7 @@ $f_1(k) = f_2(\frac{k}{x_f - x_0})$
 \item $f_1(k) = \frac{W \sqrt{\pi}}{2} (g_1(k) + g_2(k)) $ con
 \item $g_1(k) =  e^{-\frac{\pi \big[ \pi  W^2 (k + k_0)^2   + 2  i x_c(x_f - x_0)(k+ k_0)   - 2 k_0 i x_0 (x_f-x_0) \big]}{(x_f-x_0)^2}}$
 \item $g_2(k) = e^{-\frac{\pi \big[\pi  W^2 (k - k_0)^2  +2 i x_c(x_f - x_0)(k - k_0)  + 2 k_0 i x_0 (x_f-x_0)\big]}{(x_f - x_0)^2}} $
+
 
 \item Considerando $x_c$ = 0 las exponenciales $g_1$ y $g_2$ son  gaussianas  con w = $\frac{x_f - x_0}{\pi W}$ la primera centrada en $-k_0$ y la segunda en $k_0$
 \item si calculamos el módulo de cada una  el modulo las constantes $ abs(exp( - 2 k_0 i x_0 (x_f-x_0))) = abs(exp( 2 k_0 i x_0 (x_f-x_0)))  = 1$

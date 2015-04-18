@@ -13,8 +13,8 @@ import numpy as np
 from constants import z0, zf
 
 
-#periodicType = "repeat" 
-periodicType = "refl" 
+periodicType = "repeat" 
+#periodicType = "refl" 
 if periodicType == "repeat":
 
 	def  lrBoundaryConditionsPresRho(array, skip=0):
