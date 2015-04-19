@@ -358,27 +358,44 @@ $f_1(k)=F_h(\frac{2\pi k}{x_f - x_0} ) = \int_{- \infty}^{\infty}{h(x) e^{-\frac
 \item Compruebo de forma numerica y analítica que
 $f_1(k) = f_2(\frac{k}{x_f - x_0})$
 
-\item \color{red}calculo con mathematica (de forma analítica) la transformada fourier de h con FourierTransform sin especificar FourierParameters que por defecto son  $0, 1$  y obtengo $f_3(k)$. De la documentación de mathematica y también se puede comprobar de forma analítica y numérica $f_3(k) = \sqrt{\frac{1}{2 \pi}} \int_{- \infty}^{\infty}{h(x) e^{i k x}}\frac{1}{\sqrt{2 \pi}} f_1(\frac{(x_f - x_0)k}{-2 \pi})$ 
+\item \color{red}calculo con mathematica (de forma analítica) la transformada fourier de h con FourierTransform sin especificar FourierParameters que por defecto son  $0, 1$  y obtengo $f_3(k)$. De la documentación de mathematica y también se puede comprobar de forma analítica y numérica $f_3(k) = \sqrt{\frac{1}{2 \pi}} \int_{- \infty}^{\infty}{h(x) e^{i k x}} = \frac{1}{\sqrt{2 \pi}} f_1(\frac{(x_f - x_0)k}{-2 \pi})$ 
 \color{black}
 
 \item De la teoria sé que si defino los coeficientes: $c(k) = \frac{1}{x_f - x_0} f_1(k) $
 \item  puedo escribir $f(x) = \sum_{k=-\infty}^{\infty} c_k e^{2 \pi i k \frac{x-x_0}{x_f - x_0}}$
-\item observo que en python los coeficientes calculados (de forma numérica) con scipy.fft son $cp(k) = \color{red}\frac{1}{x_f - x_0}  f_1(k)$ \color{black} asi que 
+\item observo que en python los coeficientes calculados (de forma numérica) con scipy.fft son  \color{red} $cp_n =\frac{1}{x_f - x_0}  f_1(k_n)$ 
+donde $k_n = \frac{n}{x_f - x_0}, n = -N/2..N/2$ (el array se obtiene con fftfreq(N,dz))
+ \color{black} asi que 
 
-\item \textbf{quiero representar de forma analítica y numeríca} $c(k) * (x_f-x_0)$
-\item \textbf{de forma analítica}: calculo en mathematica $f_1(k)$ o obtengo $f2(k)$ y represento  $f_2(\frac{k}{x_f - x_0})$
-\item \textbf{de forma numérica}: calculo en python con scipy.fft cp(k) y  represento $cp(k* (x_f - x_0))* (x_f - x_0)$  
+\item \textbf{quiero representar de forma analítica y numeríca} $f_1(k) = c(k)  (x_f-x_0)$
+\item \textbf{de forma analítica}: \color{red} calculo de forma analítica en mathematica $f_1(k)$ (calculando la integral de forma explícita o  obtengo $f2(k)$ con FourierTransform y calculo  $f_2(\frac{k}{x_f - x_0})$), luego calculo los valores $f_1(k_n)$
+\item \textbf{de forma numérica}: calculo en python con scipy.fft $cp_n$, luego los valores $cp_n  (x_f - x_0)$  
+\item los represento frente a n ($=k_n (x_f - x_0)$)
 
+\item \textbf{quiero representar de forma analítica y numeríca} $f_3(k)$
+\item $f_3(-2 \pi k_n) =\frac{1}{\sqrt{2 \pi}} f_1(n) \implies $ el gráfico es equivalente al gráfico de $ \frac{1}{\sqrt{2 \pi}} (x_f - x_0) cp_n$ frente a n
+\item \textbf{de forma analítica}: calculo de forma analítica en mathematica $f_3(k)$ (calculando la integral de forma explícita o con FourierTransform y calculo, luego calculo los valores $f_3(-2 \pi k_n)$
+\item \textbf{de forma numérica}: calculo en python con scipy.fft $cp_n$, luego los valores $cp_n \frac{x_f - x_0}{\sqrt{2 \pi}}$  
+\item los represento frente a ($2 \pi k_n$)
+\color{black} 
 \end{description}
 
-\textbf{Resultado}:
+\textbf{Resultado analítico}:
 \begin{description}
 \item después de hacer unos cálculos llego a 
 \item $f_1(k) = \frac{W \sqrt{\pi}}{2} (g_1(k) + g_2(k)) $ con
 \item $g_1(k) =  e^{-\frac{\pi \big[ \pi  W^2 (k + k_0)^2   + 2  i x_c(x_f - x_0)(k+ k_0)   - 2 k_0 i x_0 (x_f-x_0) \big]}{(x_f-x_0)^2}}$
 \item $g_2(k) = e^{-\frac{\pi \big[\pi  W^2 (k - k_0)^2  +2 i x_c(x_f - x_0)(k - k_0)  + 2 k_0 i x_0 (x_f-x_0)\big]}{(x_f - x_0)^2}} $
 
+\color{red}
 
+\item para calcular $f_3(k)$ reemplazo en la expresión de $f_1(k)$ k por $\frac{(x_f - x_0)k}{-2 \pi}$ y $k_0$ por $\frac{k_0 (x_f - x_0)}{2 \pi} $
+la multiplico con $ \frac{1}{\sqrt{2 \pi}}$ y despues de hacer unos cálculos:
+\item $f_3(k) = \frac{W}{2 \sqrt{2}}  e^{-i  k  x_c}  (u_1(k) + u_2(k)) $
+\item $u_1(k) = e^{-\frac{W^2}{4}  (k+k_0)^2} e^{-i  k_0 (x_0-x_c)} $ 
+\item $u_2(k) = e^{-\frac{W^2}{4}  (k-k_0)^2} e^{i  k_0 (x_0-x_c)} $ 
+
+\color{black}
 \item Considerando $x_c$ = 0 las exponenciales $g_1$ y $g_2$ son  gaussianas  con w = $\frac{x_f - x_0}{\pi W}$ la primera centrada en $-k_0$ y la segunda en $k_0$
 \item si calculamos el módulo de cada una  el modulo las constantes $ abs(exp( - 2 k_0 i x_0 (x_f-x_0))) = abs(exp( 2 k_0 i x_0 (x_f-x_0)))  = 1$
 (corresponden al desplazamiento de fase por la elección de $x_c$(el centro de la función gauss) y $x_0$(el centro de la función cos ))
