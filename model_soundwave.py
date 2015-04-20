@@ -117,7 +117,8 @@ class Model(BaseModel):
 			Y = self.presFFT[0]
 			indCenter = np.argmax(Y[1:])+1
 			kc = abs(F[indCenter])
-			if(calcWidth and addMarkPoints is not None and addMarkPoints.has_key("left") and addMarkPoints.has_key("right")):
+			from common import testKeyInDict
+			if(calcWidth and addMarkPoints is not None and testKeyInDict("left",addMarkPoints) and testKeyInDict("right",addMarkPoints)):
 				#TODO test wavepcket
 				import os	
 				maxAmp = Y[indCenter]
@@ -151,7 +152,7 @@ class Model(BaseModel):
 					from analytic_solution import updateNewZ
 					updateNewZ(self, dt, False)
 				if(calcKc and not addMarkPoints is None):
-					localMarkPoint = self.addMarkPoints[addMarkPoints.keys()[0]] 
+					localMarkPoint = self.addMarkPoints[list(addMarkPoints.keys())[0]] 
 					from sound_wave_packet_params import k0, getSoundWaveGaussFunction, zc, W
 					from common import getDz, getZIndex
 					from constants import z0, zf
