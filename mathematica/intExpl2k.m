@@ -27,8 +27,8 @@ Print[ComplexExpand[Integrate[Exp[- (z-zc)^2 / W^2] Exp[2 Pi I k0 (z - z0)/ (zf 
 
 
 (* with cos *)
-Print[Integrate[Exp[- (z-zc)^2 / W^2] Cos[k0 (z - z0)] Exp[-I m z],  {z, -Infinity, Infinity} ]]
+Print[Integrate[Exp[- (z-zc)^2 / W^2] Cos[k0 (z - z0)] Exp[- 2 Pi I m z / (zf-z0)],  {z, -Infinity, Infinity} ]]
 
-Print[FullSimplify[Integrate[Exp[- (z-zc)^2 / W^2] Cos[k0 (z - z0)] Exp[- I m z],  {z, -Infinity, Infinity} ]]]
+Print[FullSimplify[Integrate[Exp[- (z-zc)^2 / W^2] Cos[k0 (z - z0)] Exp[- 2 Pi I m z / (zf - z0)],  {z, -Infinity, Infinity} ]]]
 
 

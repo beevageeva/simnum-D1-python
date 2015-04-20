@@ -33,8 +33,8 @@ plotVelFFT = True
 #plotVelFFT = False
 #plotVelFFTAnal=False
 plotVelFFTAnal=True
-#plotPresFFT = True
-plotPresFFT = False
+plotPresFFT = True
+#plotPresFFT = False
 
 from soundwave_boundary_conditions import periodicType 
 if periodicType == "refl": 

@@ -1,6 +1,6 @@
 (* <<JavaGraphics` *)
 
-$Assumptions = {Element[{k0,z0,zf,zc,W}, Reals], k0>0, z0>0, zf >0 , zf >0, zc >0, W>0 }
+$Assumptions = {Element[{k0,z0,zf,zc,W, z}, Reals], k0>0, z0>0, zf >0, zc >0, W>0 }
 
 
 h[z_, k0_, z0_, zf_, zc_, W_]:= Exp[-(z-zc)^2/W^2] Cos[k0 (z - z0) ]
@@ -11,6 +11,7 @@ Print[FullSimplify[FourierTransform[hh[z], z, k, FourierParameters->{0,-2 Pi}]] 
 *)
 
 
+Print[FourierTransform[h[z, k0, z0, zf, zc, W], z, k, FourierParameters->{0,-2 Pi}] ]
 Print[FullSimplify[FourierTransform[h[z, k0, z0, zf, zc, W], z, k, FourierParameters->{0,-2 Pi}]] ]
 
 (*

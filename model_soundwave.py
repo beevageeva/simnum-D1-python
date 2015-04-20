@@ -343,12 +343,13 @@ class Model(BaseModel):
 		#print("max freq in plotVelFFT %e" % intlen * F[np.argmax(Y[1:]) + 1 ])
 		if(plotVelFFTAnal):
 			from initcond_soundwave import getVelFFTAn
+			#when using first form
 			#vals = [intlen * abs(Y), abs(getVelFFTAn(F)), F * intlen]
-			#vals = [intlen * (1.0 / np.sqrt(2 * pi)) * abs(Y), abs(getVelFFTAn(F*(-2 * pi))), F]
 			vals = [intlen * (1.0 / np.sqrt(2 * pi)) * abs(Y), abs(getVelFFTAn(F*(-2 * pi))), F * 2 * pi]
 		else:
+			#when using first form
 			#vals = [intlen * abs(Y), F * intlen]	
-			vals = [intlen * (1.0 / np.sqrt(2 * pi)) *abs(Y), F]	
+			vals = [intlen * (1.0 / np.sqrt(2 * pi)) *abs(Y), F * 2 * pi]	
 		return vals
 
 	def getPresFFTVals(self, middlePoints):
@@ -369,8 +370,9 @@ class Model(BaseModel):
 		#print("getPresFFT")
 		#print(abs(Y)) 
 		#print("max freq in plotPresFFT %e " % intlen * F[np.argmax(Y[1:]) + 1 ] )
-		return  [intlen * abs(Y), F * intlen]	
-		#return [intlen * abs(Y), F ]	
+		#when using the first form 
+		#return  [intlen * abs(Y), F * intlen]	
+		return [intlen * (1.0 / np.sqrt(2 * pi)) *abs(Y), F * 2 * pi]	
 	
 	
 
