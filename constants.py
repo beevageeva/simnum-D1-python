@@ -42,6 +42,7 @@ nint = 2048
 #nint = 32
 
 timeEnd = 1.0 #if not set as program argument it's taken from here
+#timeEnd = 0.05 #for pycallgraph
 
 #schemeType = "lf"  # scheme type may be lf(Lax - Fr) or fg (first generation)
 schemeType = "fg" 
